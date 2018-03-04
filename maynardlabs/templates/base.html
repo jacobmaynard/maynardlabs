@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- [if IE 7]>
+	<html id="ie7" lang="en">
+<!--[endif]-->
+<!--[if IE 8]>
+	<html id="ie8" lang="en">
+<!--[endif]-->
+<!--[if (!IE)><!-->
+	<script id="twitter-wjs" src="http://platform.twitter.com/widgets.js"></script>
+<!--<![endif] -->
+
+<html lang="en">
+  <head profile="http://www.maynardlabs.com/profile">
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="{{ STATIC_URL }}css/styles.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico" type="image/x-icon"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+      <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    <script src="{{ STATIC_URL }}js/ml.js"></script>
+  </head> 
+  <body id="body">
+  	<div class="pagewrapper" id="pagewrapper">
+    	 {% block content %}{% endblock %}
+    </div>
+    <footer>
+  	{% include "footer.html" %}
+  	</footer>
+  </body>  
+</html>

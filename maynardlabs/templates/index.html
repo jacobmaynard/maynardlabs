@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load embed_video_tags %}
+
+{% block title %}MaynardLabs{% endblock %}
+
+{% block content %}
+
+<div id="banner" class="banner">
+<hr>
+		<div class="company">
+            <div id="bannerlogo"></div>
+			<p id='top-banner'>MAYNARD LABS</p>
+		</div>
+        <div class="member-div">
+            <p>
+            <a id="login" href="/members/login">login</a>
+                |&nbsp;
+            <a href="/members/manageprofile">signup</a>
+            </p>
+        </div>
+<hr id="bottombannerborder">
+</div> <!-- end of banner -->
+
+<div id="socialmediaicons">
+    <div id="facebookicon">
+        <a href="https://www.facebook.com/maynardlabs/" class="facebook"></a>
+    </div>
+    <div id="youtubeicon">
+        <a href="http://youtube.com" class="youtube"></a>
+    </div>
+    <div id="twittericon">
+        <a href="https://twitter.com/" class="twitter"></a>
+    </div>
+    <div id="linkedinicon">
+        <a href="https://linkedin.com" class="linkedin"></a>
+    </div>
+    <div id="instagramicon">
+        <a href="http://instagram.com" class="instagram"></a>
+    </div>
+</div>
+
+<!-- PAGE CONTENT -->
+<div id="index" class="container-fluid">
+	<!--<div class="left-float-banners">
+		<img src="/static/images/left-ad-space.png">
+	</div> Removing the left banner for now-->
+	<!-- include the slideshow showing latest blogs (max 5) -->
+	{% if blogs %}
+        <div class="pagediv"><h3 class="pageheader">Latest Blogs</h3></div>
+	<div class = "homeslideshow">
+		{% for blog in blogs  %}
+            <figure><a href="#" class="slideshowlink"><img src={{ blog.image.file.url }} alt="" width="100%"></a><figcaption>{{blog.title}}</figcaption></figure>
+		{% endfor %}
+		<span class="prev">«</span> <span class="next">»</span>
+	</div>
+	{% else %}
+        <h3 class="pageheader">Latest Blogs Sample</h3>
+	<div class="homeslideshow">
+		<figure><img src="/static/media/images/earth.jpg" alt="" width="100%"/> <figcaption>I am an Earthling!</figcaption></figure>
+		<figure><img src="/static/media/images/bleeding_bills_xmas.png" alt="" width="100%" /> <figcaption>Boy I Love Losing Superbowls</figcaption></figure>
+		<figure><img src="/static/media/images/pancho.png"/> <figcaption>Pancho!</figcaption></figcaption> </figure>
+		<span class="prev">«</span> <span class="next">»</span>
+	</div>
+
+	{% endif %}
+
+<!-- include the latest 3 videos -->
+
+    {% if videos %}
+
+        <div class="pagediv"><h3 class="pageheader"> Latest Videos </h3> </div>
+        <div class="divvideo">
+            {% for videoitem in videos %}
+            <div class="videoitem">{% video videoitem.video '290x150' %}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+<!-- include the latest 3 podcasts -->
+
+	{% if podcasts %}
+	<h3 class="pageheader"> Latest Podcasts </h3>
+	<div class="divpodcast">
+		{% for podcast in podcasts %}
+		<figure> <img src={{ podcast.image.file.url }} alt=""> <figcaption> {{ podcast.title }} </figcaption> </figure>
+		{% endfor %}
+	</div>
+	<!--TODO include the podcasts (max 3) -->
+	{% endif %}
+    <div id="myNav" class="overlay">
+            <!-- Button to close the overlay navigation -->
+               <div class="overlaypagewrapper">
+                   <a href="javascript:void(0)" id="close-blue-thick" class="closebtn" onclick="closeNav()"></a>
+                   <div id="canvasspinnerdiv">
+                       <img src="/static/images/spinner_106x106.gif" id="canvasspinnerimg"/>
+                   </div>
+               </div>
+    </div>
+
+	<!--<div class="right-float-banners">
+		<img id="right-add-space" src="/static/images/right-ad-space.png">
+	</div>-->
+</div> <!--.container-fluid -->
+{% endblock %}
