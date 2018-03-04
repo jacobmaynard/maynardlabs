@@ -34,7 +34,7 @@ MEDIA_ROOT = STATIC_ROOT + 'media/'
 
 MEDIA_URL = "/static/media/"
 
-CKEDITOR_JQUERY_URL = "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"
+CKEDITOR_JQUERY_URL = "//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"
 
 
 # Quick-start development settings - unsuitable for production
@@ -161,3 +161,8 @@ LOGGING = {
     }
 }
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+    }
+}

@@ -81,29 +81,36 @@ class Blog(models.Model):
     content = RichTextField(max_length=20971520)
     hitcount = models.IntegerField(default=0)
     sharedcount = models.IntegerField(default=0)
+
     def __unicode__(self):
         return self.title
+
     def updateHitCount(self):
         self.hitcount = self.hitcount + 1
+
     def updateSharedCount(self):
         self.sharedcount = self.sharedcount + 1
+
     def getTitle(self):
         return self.title
+
     def getPubDate(self):
         return self.pubdate
+
     def updateLastModified(self):
         self.lastmod = datetime.now()
-    
+
     class Meta:
         ordering = ['-pubdate']
     
 class Image(models.Model):
     name = models.CharField(max_length=50, blank=False, null=False)
-    file = models.ImageField(upload_to='images', blank=True)
+    file = models.ImageField(upload_to='images/', blank=False)
+
     def __unicode__(self):
         return self.name
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
+
+    def save(self, *args, **kwargs):
         if not self.id and not self.file:
             return
 
@@ -120,12 +127,16 @@ class Image(models.Model):
         tempimage.save(tempimage_io, format='JPEG')
         image_file = InMemoryUploadedFile(tempimage_io, None, self.name + '.jpg', 'image/jpeg', tempimage_io.len, None)
         self.file = image_file
+        super(Image, self).save(*args, **kwargs)
+
 
 class VidMbed(models.Model):
     name = models.CharField(max_length=50, blank=False, null=False)
     video = EmbedVideoField()
+
     def getTitle(self):
         return self.name
+
 
 class Podcast(models.Model):
     title = models.CharField(max_length=100, blank=False, null=False)
@@ -138,12 +149,16 @@ class Podcast(models.Model):
     image = models.ForeignKey('Image')
     hitcount = models.IntegerField(default=0)
     sharedcount = models.IntegerField(default=0)
+
     def __unicode__(self):
         return self.title
+
     def updateHitCount(self):
         self.hitcount = self.hitcount + 1
+
     def updateSharedCount(self):
         self.sharedcount = self.sharedcount + 1
+
     def getTitle(self):
         return self.title
     
